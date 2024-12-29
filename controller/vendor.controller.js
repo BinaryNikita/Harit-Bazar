@@ -1,11 +1,10 @@
-import { Vendor } from '../models/vendor.js';
-
+import VendorService from "../services/vendor.service.js";
 export const createVendor = async (vendorData) => {
-  try {
-    const newVendor = new Vendor(vendorData);
-    await newVendor.save();
-    return newVendor;
-  } catch (error) {
-    throw new Error('Error creating vendor: ' + error.message);
-  }
+    try {
+        const vendorData = req.body; 
+        const newVendor = await vendorService.createVendor(vendorData);
+        res.status(201).json({ message: 'Vendor created successfully', vendor: newVendor });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
